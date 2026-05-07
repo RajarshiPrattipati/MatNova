@@ -24,12 +24,45 @@
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   <div class="chapter-label" id="chapterLabel"></div>
   <button class="about-btn" id="aboutBtn">About</button>
+  <button class="contents-btn" id="contentsBtn">Contents</button>
+
+  <!-- ======= CHAPTER NAV PANEL ======= -->
+  <nav class="contents-panel" id="contentsPanel" aria-hidden="true">
+    <button class="contents-close" id="contentsClose">×</button>
+    <p class="contents-heading">Contents</p>
+    <ol class="contents-list">
+      <li><a href="#ch-surface"      class="contents-link" data-index="0"><span class="contents-num">I</span><span class="contents-name">Surface</span></a></li>
+      <li><a href="#ch-glass"        class="contents-link" data-index="1"><span class="contents-num">II</span><span class="contents-name">The Glass Between</span></a></li>
+      <li><a href="#ch-mirrors"      class="contents-link" data-index="2"><span class="contents-num">III</span><span class="contents-name">Others as Mirrors</span></a></li>
+      <li><a href="#ch-burden"       class="contents-link" data-index="3"><span class="contents-num">IV</span><span class="contents-name">The Burden of the Body</span></a></li>
+      <li><a href="#ch-shadow"       class="contents-link" data-index="4"><span class="contents-num">V</span><span class="contents-name">Shadow Work</span></a></li>
+      <li><a href="#ch-inside"       class="contents-link" data-index="5"><span class="contents-num">VI</span><span class="contents-name">Inside</span></a></li>
+      <li><a href="#ch-mural"        class="contents-link" data-index="6"><span class="contents-num">VII</span><span class="contents-name">Mural of a Muse</span></a></li>
+      <li><a href="#ch-phantom"      class="contents-link" data-index="7"><span class="contents-num">VIII</span><span class="contents-name">Phantom of My Mind's Design</span></a></li>
+      <li><a href="#ch-moon"         class="contents-link" data-index="8"><span class="contents-num">IX</span><span class="contents-name">Conversations with the Moon</span></a></li>
+      <li><a href="#ch-illumination" class="contents-link" data-index="9"><span class="contents-num">X</span><span class="contents-name">Illumination</span></a></li>
+      <li class="contents-nft"><a href="#collected" class="contents-link" data-index="10"><span class="contents-num">—</span><span class="contents-name">Collected Works</span></a></li>
+    </ol>
+  </nav>
+  <div class="contents-backdrop" id="contentsBackdrop"></div>
+
+  <!-- ======= CHAPTER JUMPERS ======= -->
+  <div class="chapter-jumpers">
+    <button class="jump-btn jump-btn--prev" id="jumpPrev" aria-label="Previous chapter">
+      <span class="jump-arrow">←</span>
+      <span class="jump-label" id="jumpPrevLabel"></span>
+    </button>
+    <button class="jump-btn jump-btn--next" id="jumpNext" aria-label="Next chapter">
+      <span class="jump-label" id="jumpNextLabel"></span>
+      <span class="jump-arrow">→</span>
+    </button>
+  </div>
 
   <!-- ======= JOURNEY ======= -->
   <main id="journey">
 
     <!-- ─── CHAPTER 0: SURFACE ─────────────────── -->
-    <section class="chapter" data-chapter="SURFACE">
+    <section class="chapter" data-chapter="SURFACE" id="ch-surface">
 
       <div class="scene">
         <img class="parallax-img" src="assets/other/morning-stroll-mg-road.jpg" alt="">
@@ -53,7 +86,7 @@
     </section>
 
     <!-- ─── CHAPTER 1: THE GLASS BETWEEN ──────── -->
-    <section class="chapter chapter--dark" data-chapter="THE GLASS BETWEEN">
+    <section class="chapter chapter--dark" data-chapter="THE GLASS BETWEEN" id="ch-glass">
 
       <div class="scene">
         <img class="parallax-img parallax-img--mono" src="Chinoy%20Mathew_B18%202.jpg" alt="">
@@ -73,7 +106,7 @@
     </section>
 
     <!-- ─── CHAPTER 2: OTHERS AS MIRRORS ─────── -->
-    <section class="chapter" data-chapter="OTHERS AS MIRRORS">
+    <section class="chapter" data-chapter="OTHERS AS MIRRORS" id="ch-mirrors">
 
       <div class="scene">
         <img class="parallax-img" src="Chinoy%20Mathew_B18%201.jpeg" alt="">
@@ -101,7 +134,7 @@
     </section>
 
     <!-- ─── CHAPTER 3: BURDEN OF THE BODY ──────── -->
-    <section class="chapter chapter--warm" data-chapter="THE BURDEN OF THE BODY">
+    <section class="chapter chapter--warm" data-chapter="THE BURDEN OF THE BODY" id="ch-burden">
 
       <div class="scene">
         <img class="parallax-img" src="Chinoy%20Mathew_B18%205.jpg" alt="">
@@ -121,7 +154,7 @@
     </section>
 
     <!-- ─── CHAPTER 4: SHADOW WORK ───────────── -->
-    <section class="chapter chapter--dark" data-chapter="SHADOW WORK">
+    <section class="chapter chapter--dark" data-chapter="SHADOW WORK" id="ch-shadow">
 
       <div class="scene">
         <img class="parallax-img" src="Chinoy%20Mathew_B18%2012.jpg" alt="">
@@ -145,7 +178,7 @@
     </section>
 
     <!-- ─── CHAPTER 5: INSIDE ────────────────── -->
-    <section class="chapter chapter--abyss" data-chapter="INSIDE">
+    <section class="chapter chapter--abyss" data-chapter="INSIDE" id="ch-inside">
 
       <div class="chapter-divider">
         <p class="divider-text">I have been in the dark places.<br>Not metaphorically.</p>
@@ -209,7 +242,7 @@
     </section>
 
     <!-- ─── CHAPTER 6: MURAL OF A MUSE ──────── -->
-    <section class="chapter chapter--violet" data-chapter="MURAL OF A MUSE">
+    <section class="chapter chapter--violet" data-chapter="MURAL OF A MUSE" id="ch-mural">
 
       <div class="chapter-divider divider--violet">
         <p class="divider-text">We were at a house party.<br>A purple light illuminated the wall<br>she was sitting against.</p>
@@ -249,7 +282,7 @@
     </section>
 
     <!-- ─── CHAPTER 7: PHANTOM ────────────────── -->
-    <section class="chapter chapter--phantom" data-chapter="PHANTOM OF MY MIND'S DESIGN">
+    <section class="chapter chapter--phantom" data-chapter="PHANTOM OF MY MIND'S DESIGN" id="ch-phantom">
 
       <div class="chapter-divider">
         <p class="divider-text divider-text--phantom">Phantom of My Mind's Design</p>
@@ -280,7 +313,7 @@
     </section>
 
     <!-- ─── CHAPTER 8: CONVERSATIONS WITH THE MOON ─ -->
-    <section class="chapter chapter--moon" data-chapter="CONVERSATIONS WITH THE MOON">
+    <section class="chapter chapter--moon" data-chapter="CONVERSATIONS WITH THE MOON" id="ch-moon">
 
       <div class="scene">
         <img class="parallax-img" src="assets/moon/luna.jpg" alt="">
@@ -312,7 +345,7 @@
     </section>
 
     <!-- ─── CHAPTER 9: ILLUMINATION ─────────── -->
-    <section class="chapter chapter--return" data-chapter="ILLUMINATION">
+    <section class="chapter chapter--return" data-chapter="ILLUMINATION" id="ch-illumination">
 
       <div class="scene">
         <img class="parallax-img" src="assets/mental-health/illumination.jpg" alt="">
@@ -347,6 +380,189 @@
     </section>
 
   </main>
+
+  <!-- ======= COLLECTED WORKS — NFT SECTION ======= -->
+  <section id="collected">
+
+    <div class="collected-header">
+      <p class="collected-eyebrow">On the blockchain</p>
+      <h2 class="collected-title">Collected Works</h2>
+      <div class="collected-tally">
+        <div class="tally-item">
+          <span class="tally-num">748</span>
+          <span class="tally-unit">XTZ collected</span>
+        </div>
+        <div class="tally-divider"></div>
+        <div class="tally-item">
+          <span class="tally-num">100</span>
+          <span class="tally-unit">trades</span>
+        </div>
+        <div class="tally-divider"></div>
+        <div class="tally-item">
+          <span class="tally-num">60+</span>
+          <span class="tally-unit">unique collectors</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nft-grid">
+
+      <!-- flower eater — 200 XTZ 1/1 -->
+      <div class="nft-card" data-title="flower eater"
+           data-desc="A single edition work. Sold for 200 XTZ."
+           data-edition="1 of 1" data-status="sold" data-price="200 XTZ"
+           data-img="assets/nft/flower-eater.jpg"
+           data-url="https://objkt.com/tokens/KT1J5V4ER33mNFysCRbsHsNAa2HpMvDt2igw/3">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/flower-eater.jpg" alt="flower eater">
+          <div class="nft-badge nft-badge--sold">sold · 200 XTZ</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">1 / 1</p>
+          <h3 class="nft-title">flower eater</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1J5V4ER33mNFysCRbsHsNAa2HpMvDt2igw/3" target="_blank" rel="noopener">view on objkt →</a>
+        </div>
+      </div>
+
+      <!-- i was too afraid — 100 XTZ 1/1 -->
+      <div class="nft-card" data-title="i was too afraid to tell you that you mean the world to me"
+           data-desc="A single edition work. Sold for 100 XTZ."
+           data-edition="1 of 1" data-status="sold" data-price="100 XTZ"
+           data-img="assets/nft/i-was-too-afraid.jpg"
+           data-url="https://objkt.com/tokens/KT1J5V4ER33mNFysCRbsHsNAa2HpMvDt2igw/10">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/i-was-too-afraid.jpg" alt="i was too afraid to tell you">
+          <div class="nft-badge nft-badge--sold">sold · 100 XTZ</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">1 / 1</p>
+          <h3 class="nft-title">i was too afraid to tell you that you mean the world to me</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1J5V4ER33mNFysCRbsHsNAa2HpMvDt2igw/10" target="_blank" rel="noopener">view on objkt →</a>
+        </div>
+      </div>
+
+      <!-- anonymous shadows in the metro — SOLD OUT 10/10 -->
+      <div class="nft-card" data-title="anonymous shadows in the metro"
+           data-desc="Edition of 10. All 10 collected. 150 XTZ total volume across 10 trades."
+           data-edition="10 of 10" data-status="sold-out" data-price="150 XTZ total"
+           data-img="assets/nft/anonymous-shadows-nft.jpg"
+           data-url="https://objkt.com/tokens/KT1DgRL4eGngYF9D2WQihNNHG6Ea7hgjwzpN/6">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/anonymous-shadows-nft.jpg" alt="anonymous shadows in the metro">
+          <div class="nft-badge nft-badge--soldout">sold out</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">edition of 10 · sold out</p>
+          <h3 class="nft-title">anonymous shadows in the metro</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1DgRL4eGngYF9D2WQihNNHG6Ea7hgjwzpN/6" target="_blank" rel="noopener">view on objkt →</a>
+        </div>
+      </div>
+
+      <!-- i rearranged my heart — 70 XTZ total -->
+      <div class="nft-card" data-title="i rearranged my heart to fit you in it"
+           data-desc="Edition of 15. 14 collected. 70 XTZ total volume."
+           data-edition="14 of 15" data-status="nearly-sold" data-price="70 XTZ total"
+           data-img="assets/nft/i-rearranged-my-heart.jpg"
+           data-url="https://objkt.com/tokens/KT1EAqF6pR9d3jb1UzMt5YRdWg6U1Pwh83xE/12">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/i-rearranged-my-heart.jpg" alt="i rearranged my heart to fit you in it">
+          <div class="nft-badge nft-badge--active">14 / 15 collected</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">edition of 15 · 1 remaining</p>
+          <h3 class="nft-title">i rearranged my heart to fit you in it</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1EAqF6pR9d3jb1UzMt5YRdWg6U1Pwh83xE/12" target="_blank" rel="noopener">collect on objkt →</a>
+        </div>
+      </div>
+
+      <!-- eyes closed because — 49 XTZ sold out 7/7 -->
+      <div class="nft-card" data-title="eyes closed because you can't look at what you're leaving behind"
+           data-desc="Edition of 7. All 7 collected at 7 XTZ each. 49 XTZ total."
+           data-edition="7 of 7" data-status="sold-out" data-price="49 XTZ total"
+           data-img="assets/nft/eyes-closed-because.jpg"
+           data-url="https://objkt.com/tokens/KT1EAqF6pR9d3jb1UzMt5YRdWg6U1Pwh83xE/18">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/eyes-closed-because.jpg" alt="eyes closed because you can't look at what you're leaving behind">
+          <div class="nft-badge nft-badge--soldout">sold out</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">edition of 7 · sold out</p>
+          <h3 class="nft-title">eyes closed because you can't look at what you're leaving behind</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1EAqF6pR9d3jb1UzMt5YRdWg6U1Pwh83xE/18" target="_blank" rel="noopener">view on objkt →</a>
+        </div>
+      </div>
+
+      <!-- specters of paranoia — nearly sold out -->
+      <div class="nft-card" data-title="specters of paranoia"
+           data-desc="Edition of 10. 9 collected. 45 XTZ total volume."
+           data-edition="9 of 10" data-status="nearly-sold" data-price="45 XTZ total"
+           data-img="assets/nft/specters-of-paranoia.jpg"
+           data-url="https://objkt.com/tokens/KT1TYSRZ5Q4tZFKFG3cUiYUxKHj3X4iT9qmE/7">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/specters-of-paranoia.jpg" alt="specters of paranoia">
+          <div class="nft-badge nft-badge--active">9 / 10 collected</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">edition of 10 · 1 remaining</p>
+          <h3 class="nft-title">specters of paranoia</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1TYSRZ5Q4tZFKFG3cUiYUxKHj3X4iT9qmE/7" target="_blank" rel="noopener">collect on objkt →</a>
+        </div>
+      </div>
+
+      <!-- the sky the night we met — sold out 10/10 -->
+      <div class="nft-card" data-title="the sky the night we met"
+           data-desc="Edition of 10. All 10 collected. 45 XTZ total volume."
+           data-edition="10 of 10" data-status="sold-out" data-price="45 XTZ total"
+           data-img="assets/nft/sky-night-we-met.jpg"
+           data-url="https://objkt.com/tokens/KT1NZibBgAXMVW1gz9wUvVKbcD5vUhUzUF6J/19">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/sky-night-we-met.jpg" alt="the sky the night we met">
+          <div class="nft-badge nft-badge--soldout">sold out</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">edition of 10 · sold out</p>
+          <h3 class="nft-title">the sky the night we met</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1NZibBgAXMVW1gz9wUvVKbcD5vUhUzUF6J/19" target="_blank" rel="noopener">view on objkt →</a>
+        </div>
+      </div>
+
+      <!-- i wish you well even now — 40 collectors -->
+      <div class="nft-card" data-title="i wish you well even now"
+           data-desc="Open edition of 50. 40 collectors. 42 XTZ total volume."
+           data-edition="40 of 50" data-status="active" data-price="42 XTZ total"
+           data-img="assets/nft/i-wish-you-well.jpg"
+           data-url="https://objkt.com/tokens/KT1EAqF6pR9d3jb1UzMt5YRdWg6U1Pwh83xE/10">
+        <div class="nft-img-wrap">
+          <img src="assets/nft/i-wish-you-well.jpg" alt="i wish you well even now">
+          <div class="nft-badge nft-badge--active">40 collectors</div>
+        </div>
+        <div class="nft-info">
+          <p class="nft-edition-tag">edition of 50 · 10 remaining</p>
+          <h3 class="nft-title">i wish you well even now</h3>
+          <a class="nft-link" href="https://objkt.com/tokens/KT1EAqF6pR9d3jb1UzMt5YRdWg6U1Pwh83xE/10" target="_blank" rel="noopener">collect on objkt →</a>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ======= NFT LIGHTBOX ======= -->
+  <div class="nft-lightbox" id="nftLightbox" aria-hidden="true">
+    <button class="nft-lb-close" id="nftLbClose" aria-label="Close">×</button>
+    <div class="nft-lb-inner">
+      <div class="nft-lb-img-wrap">
+        <img src="" alt="" id="nftLbImg">
+      </div>
+      <div class="nft-lb-copy">
+        <p class="nft-lb-edition" id="nftLbEdition"></p>
+        <h2 class="nft-lb-title" id="nftLbTitle"></h2>
+        <p class="nft-lb-desc" id="nftLbDesc"></p>
+        <p class="nft-lb-price" id="nftLbPrice"></p>
+        <a class="nft-lb-cta" id="nftLbCta" href="#" target="_blank" rel="noopener">collect on objkt →</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ======= ABOUT OVERLAY ======= -->
   <div class="about-overlay" id="aboutOverlay">

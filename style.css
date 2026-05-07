@@ -169,22 +169,39 @@ body {
    ============================================================ */
 .scene {
   position: relative;
-  /* Height grows to fit the full image — no fixed height that clips */
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-/* Abyss / phantom scenes get extra vertical breathing room */
+/* Abyss / phantom scenes */
 .scene--abyss {
-  min-height: 110vh;
+  min-height: 75vh;
 }
 
-/* Final scene */
+/* Final scene — text beside image */
 .scene--final {
-  min-height: 100vh;
+  min-height: 80vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.scene--final .parallax-img--final {
+  flex: 0 0 auto;
+  max-width: 58%;
+  max-height: 88vh;
+}
+
+.scene--final .scene-text {
+  position: relative;
+  z-index: 10;
+  top: auto; left: auto; right: auto; bottom: auto;
+  transform: none;
+  flex: 1;
+  padding: 3rem 4rem 3rem 5rem;
 }
 
 /* Atmospheric vignette: edges only, never covers the image centre */
@@ -394,6 +411,525 @@ body {
 .divider--violet .divider-text {
   color: rgba(190, 160, 220, 0.6);
 }
+
+/* ============================================================
+   COLLECTED WORKS — NFT SECTION
+   ============================================================ */
+#collected {
+  background: #080808;
+  padding: 8rem 0 6rem;
+  border-top: 1px solid rgba(240, 237, 232, 0.06);
+}
+
+.collected-header {
+  text-align: center;
+  padding: 0 2rem;
+  margin-bottom: 5rem;
+}
+
+.collected-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.3);
+  margin-bottom: 1.4rem;
+}
+
+.collected-title {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--off-white);
+  letter-spacing: 0.01em;
+  margin-bottom: 2.8rem;
+}
+
+.collected-tally {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.tally-item {
+  text-align: center;
+}
+
+.tally-num {
+  display: block;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--amber);
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.tally-unit {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.38);
+}
+
+.tally-divider {
+  width: 1px;
+  height: 2.5rem;
+  background: rgba(240, 237, 232, 0.1);
+}
+
+/* NFT Grid */
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(240, 237, 232, 0.06);
+  border-top: 1px solid rgba(240, 237, 232, 0.06);
+  border-bottom: 1px solid rgba(240, 237, 232, 0.06);
+}
+
+.nft-card {
+  background: #080808;
+  cursor: pointer;
+  transition: background 0.35s ease;
+  overflow: hidden;
+}
+
+.nft-card:hover {
+  background: #0f0f0f;
+}
+
+.nft-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: #040404;
+}
+
+.nft-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: grayscale(20%) brightness(0.85);
+  transition: filter 0.5s ease, transform 0.6s ease;
+}
+
+.nft-card:hover .nft-img-wrap img {
+  filter: grayscale(0%) brightness(1.0);
+  transform: scale(1.03);
+}
+
+/* Badges */
+.nft-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  z-index: 2;
+}
+
+.nft-badge--sold {
+  background: rgba(200, 169, 126, 0.15);
+  color: var(--amber);
+  border: 1px solid rgba(200, 169, 126, 0.3);
+}
+
+.nft-badge--soldout {
+  background: rgba(200, 169, 126, 0.12);
+  color: rgba(200, 169, 126, 0.7);
+  border: 1px solid rgba(200, 169, 126, 0.2);
+}
+
+.nft-badge--active {
+  background: rgba(240, 237, 232, 0.07);
+  color: rgba(240, 237, 232, 0.55);
+  border: 1px solid rgba(240, 237, 232, 0.12);
+}
+
+/* Card info */
+.nft-info {
+  padding: 1.2rem 1.4rem 1.6rem;
+}
+
+.nft-edition-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.28);
+  margin-bottom: 0.55rem;
+}
+
+.nft-title {
+  font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.82);
+  line-height: 1.5;
+  margin-bottom: 1.1rem;
+  min-height: 2.6em;
+}
+
+.nft-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.28);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  pointer-events: none; /* card click handles navigation; link is visual */
+}
+
+.nft-card:hover .nft-link {
+  color: var(--amber);
+}
+
+/* Footer CTA */
+.collected-footer {
+  text-align: center;
+  padding: 4rem 2rem 0;
+}
+
+.collected-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.35);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(240, 237, 232, 0.12);
+  padding-bottom: 0.2rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.collected-cta:hover {
+  color: var(--off-white);
+  border-color: rgba(240, 237, 232, 0.4);
+}
+
+/* ============================================================
+   NFT LIGHTBOX
+   ============================================================ */
+.nft-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.97);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 3rem;
+  overflow-y: auto;
+}
+
+.nft-lightbox.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nft-lb-close {
+  position: fixed;
+  top: 2rem;
+  right: 2.5rem;
+  font-size: 2.4rem;
+  font-weight: 300;
+  font-family: 'Cormorant Garamond', serif;
+  color: rgba(240, 237, 232, 0.3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 310;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+.nft-lb-close:hover { color: var(--off-white); }
+
+.nft-lb-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  max-width: 1000px;
+  width: 100%;
+  align-items: center;
+}
+
+.nft-lb-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nft-lb-img-wrap img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+}
+
+.nft-lb-copy {
+  padding: 1rem 0;
+}
+
+.nft-lb-edition {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.3);
+  margin-bottom: 1rem;
+}
+
+.nft-lb-title {
+  font-size: clamp(1.2rem, 2.2vw, 1.9rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--off-white);
+  line-height: 1.45;
+  margin-bottom: 1.6rem;
+}
+
+.nft-lb-desc {
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(240, 237, 232, 0.55);
+  margin-bottom: 1.2rem;
+}
+
+.nft-lb-price {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  margin-bottom: 2.2rem;
+}
+
+.nft-lb-cta {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.35);
+  text-decoration: none;
+  border: 1px solid rgba(240, 237, 232, 0.15);
+  padding: 0.75rem 1.4rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.nft-lb-cta:hover {
+  color: var(--off-white);
+  border-color: rgba(240, 237, 232, 0.45);
+}
+
+@media (max-width: 900px) {
+  .nft-grid { grid-template-columns: repeat(2, 1fr); }
+  .nft-lb-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .nft-lb-img-wrap img { max-height: 45vh; }
+  .nft-lightbox { padding: 4rem 1.5rem 2rem; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .nft-grid { grid-template-columns: 1fr 1fr; }
+  #collected { padding: 5rem 0 4rem; }
+  .collected-tally { gap: 1.5rem; }
+  .tally-divider { display: none; }
+}
+
+/* ============================================================
+   CONTENTS BUTTON
+   ============================================================ */
+.contents-btn {
+  position: fixed;
+  bottom: 5rem;
+  right: 4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.28);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  transition: color 0.3s ease;
+  padding: 0;
+}
+.contents-btn:hover { color: rgba(240, 237, 232, 0.75); }
+
+/* ============================================================
+   CONTENTS PANEL
+   ============================================================ */
+.contents-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 100%;
+  background: rgba(8, 8, 8, 0.97);
+  border-right: 1px solid rgba(240, 237, 232, 0.07);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 3.5rem 3rem;
+  transform: translateX(-100%);
+  transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+  backdrop-filter: blur(12px);
+}
+.contents-panel.open {
+  transform: translateX(0);
+}
+
+.contents-close {
+  position: absolute;
+  top: 1.8rem;
+  right: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.25);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.25s;
+}
+.contents-close:hover { color: rgba(240, 237, 232, 0.7); }
+
+.contents-heading {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.2);
+  margin-bottom: 3rem;
+}
+
+.contents-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.contents-nft {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(240, 237, 232, 0.06);
+}
+
+.contents-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  text-decoration: none;
+  padding: 0.6rem 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.55;
+}
+.contents-link:hover,
+.contents-link.active { opacity: 1; }
+.contents-link.active .contents-num { color: var(--amber); }
+
+.contents-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.48rem;
+  letter-spacing: 0.12em;
+  color: rgba(240, 237, 232, 0.3);
+  min-width: 2.2rem;
+  transition: color 0.25s;
+}
+
+.contents-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--off-white);
+  line-height: 1.3;
+}
+
+.contents-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 199;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.contents-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ============================================================
+   CHAPTER JUMPERS (PREV / NEXT)
+   ============================================================ */
+.chapter-jumpers {
+  position: fixed;
+  bottom: 2.2rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4rem;
+  z-index: 90;
+  pointer-events: none;
+}
+
+.jump-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.22);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  pointer-events: all;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.jump-btn.visible { opacity: 1; }
+.jump-btn:hover { color: rgba(240, 237, 232, 0.65); }
+.jump-btn--prev:empty,
+.jump-btn--next:empty { pointer-events: none; }
+
+.jump-arrow {
+  font-size: 0.7rem;
+  color: rgba(240, 237, 232, 0.2);
+  transition: color 0.3s ease;
+}
+.jump-btn:hover .jump-arrow { color: rgba(240, 237, 232, 0.55); }
+
+.jump-label { max-width: 16rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ============================================================
    ABOUT OVERLAY

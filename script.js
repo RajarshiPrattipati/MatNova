@@ -250,6 +250,197 @@ if (finalScene) {
 }
 
 /* ============================================================
+   COLLECTED WORKS — NFT SECTION
+   ============================================================ */
+
+// Stagger-animate tally numbers on scroll entry
+gsap.from('.tally-item', {
+  opacity: 0, y: 16,
+  duration: 1.4, ease: 'power2.out',
+  stagger: 0.18,
+  scrollTrigger: {
+    trigger: '.collected-tally',
+    start: 'top 82%',
+    toggleActions: 'play none none none',
+  },
+});
+
+// Fade in header elements
+gsap.from('.collected-eyebrow', {
+  opacity: 0, y: 12, duration: 1.2, ease: 'power2.out',
+  scrollTrigger: { trigger: '#collected', start: 'top 78%', toggleActions: 'play none none none' },
+});
+gsap.from('.collected-title', {
+  opacity: 0, y: 20, duration: 1.6, ease: 'power2.out', delay: 0.2,
+  scrollTrigger: { trigger: '#collected', start: 'top 78%', toggleActions: 'play none none none' },
+});
+
+// Stagger cards in
+gsap.from('.nft-card', {
+  opacity: 0, y: 30,
+  duration: 1.2, ease: 'power2.out',
+  stagger: 0.08,
+  scrollTrigger: {
+    trigger: '.nft-grid',
+    start: 'top 82%',
+    toggleActions: 'play none none none',
+  },
+});
+
+// NFT Lightbox
+const nftLightbox = document.getElementById('nftLightbox');
+const nftLbClose  = document.getElementById('nftLbClose');
+
+function openNftLightbox(card) {
+  document.getElementById('nftLbImg').src     = card.dataset.img;
+  document.getElementById('nftLbImg').alt     = card.dataset.title;
+  document.getElementById('nftLbTitle').textContent   = card.dataset.title;
+  document.getElementById('nftLbDesc').textContent    = card.dataset.desc;
+  document.getElementById('nftLbEdition').textContent = card.dataset.edition;
+  document.getElementById('nftLbPrice').textContent   = card.dataset.price;
+
+  const cta = document.getElementById('nftLbCta');
+  cta.href = card.dataset.url;
+  const isSold = card.dataset.status === 'sold' || card.dataset.status === 'sold-out';
+  cta.textContent = isSold ? 'view on objkt →' : 'collect on objkt →';
+
+  nftLightbox.classList.add('active');
+  nftLightbox.removeAttribute('aria-hidden');
+  lenis.stop();
+}
+
+function closeNftLightbox() {
+  nftLightbox.classList.remove('active');
+  nftLightbox.setAttribute('aria-hidden', 'true');
+  lenis.start();
+}
+
+document.querySelectorAll('.nft-card').forEach(card => {
+  card.addEventListener('click', e => {
+    if (e.target.closest('a')) return; // allow link clicks to pass through
+    openNftLightbox(card);
+  });
+});
+
+nftLbClose.addEventListener('click', closeNftLightbox);
+nftLightbox.addEventListener('click', e => { if (e.target === nftLightbox) closeNftLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNftLightbox(); });
+
+/* ============================================================
+   CHAPTER NAVIGATION
+   ============================================================ */
+
+const CHAPTERS = [
+  { id: 'ch-surface',      label: 'Surface' },
+  { id: 'ch-glass',        label: 'The Glass Between' },
+  { id: 'ch-mirrors',      label: 'Others as Mirrors' },
+  { id: 'ch-burden',       label: 'The Burden of the Body' },
+  { id: 'ch-shadow',       label: 'Shadow Work' },
+  { id: 'ch-inside',       label: 'Inside' },
+  { id: 'ch-mural',        label: 'Mural of a Muse' },
+  { id: 'ch-phantom',      label: 'Phantom of My Mind\'s Design' },
+  { id: 'ch-moon',         label: 'Conversations with the Moon' },
+  { id: 'ch-illumination', label: 'Illumination' },
+  { id: 'collected',       label: 'Collected Works' },
+];
+
+let currentChapterIndex = 0;
+
+const contentsBtn      = document.getElementById('contentsBtn');
+const contentsPanel    = document.getElementById('contentsPanel');
+const contentsClose    = document.getElementById('contentsClose');
+const contentsBackdrop = document.getElementById('contentsBackdrop');
+const jumpPrev         = document.getElementById('jumpPrev');
+const jumpNext         = document.getElementById('jumpNext');
+const jumpPrevLabel    = document.getElementById('jumpPrevLabel');
+const jumpNextLabel    = document.getElementById('jumpNextLabel');
+
+function openContents() {
+  contentsPanel.classList.add('open');
+  contentsBackdrop.classList.add('open');
+  contentsPanel.removeAttribute('aria-hidden');
+  lenis.stop();
+}
+function closeContents() {
+  contentsPanel.classList.remove('open');
+  contentsBackdrop.classList.remove('open');
+  contentsPanel.setAttribute('aria-hidden', 'true');
+  lenis.start();
+}
+
+contentsBtn.addEventListener('click', openContents);
+contentsClose.addEventListener('click', closeContents);
+contentsBackdrop.addEventListener('click', closeContents);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeContents(); });
+
+// Navigate to a chapter by index
+function goToChapter(idx) {
+  const ch = CHAPTERS[idx];
+  if (!ch) return;
+  const el = document.getElementById(ch.id);
+  if (!el) return;
+  closeContents();
+  lenis.scrollTo(el, { offset: 0, duration: 1.6 });
+}
+
+// Smooth-scroll all contents links via Lenis
+document.querySelectorAll('.contents-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const idx = parseInt(link.dataset.index, 10);
+    goToChapter(idx);
+  });
+});
+
+// Prev / next buttons
+jumpPrev.addEventListener('click', () => goToChapter(currentChapterIndex - 1));
+jumpNext.addEventListener('click', () => goToChapter(currentChapterIndex + 1));
+
+function setActiveChapter(idx) {
+  currentChapterIndex = idx;
+
+  // Highlight active item in panel
+  document.querySelectorAll('.contents-link').forEach((l, i) => {
+    l.classList.toggle('active', i === idx);
+  });
+
+  // Update prev / next labels
+  const prev = CHAPTERS[idx - 1];
+  const next = CHAPTERS[idx + 1];
+
+  if (prev) {
+    jumpPrevLabel.textContent = prev.label;
+    jumpPrev.classList.add('visible');
+  } else {
+    jumpPrevLabel.textContent = '';
+    jumpPrev.classList.remove('visible');
+  }
+
+  if (next) {
+    jumpNextLabel.textContent = next.label;
+    jumpNext.classList.add('visible');
+  } else {
+    jumpNextLabel.textContent = '';
+    jumpNext.classList.remove('visible');
+  }
+}
+
+// Track which chapter is in view
+CHAPTERS.forEach((ch, idx) => {
+  const el = document.getElementById(ch.id);
+  if (!el) return;
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 60%',
+    onEnter:      () => setActiveChapter(idx),
+    onEnterBack:  () => setActiveChapter(idx),
+  });
+});
+
+// Init first chapter
+setActiveChapter(0);
+
+/* ============================================================
    ABOUT OVERLAY
    ============================================================ */
 const overlay  = document.getElementById('aboutOverlay');
