@@ -1,0 +1,541 @@
+/* ============================================================
+   THE SPACE BETWEEN THE SHADOW AND THE LIGHT
+   Chinoy Mathew — Portfolio Website
+   ============================================================ */
+
+/* ---- RESET & BASE ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --black:       #0a0a0a;
+  --near-black:  #111111;
+  --off-white:   #f0ede8;
+  --amber:       #c8a97e;
+  --silver:      #b8bfc7;
+  --violet-text: #c4a8e0;
+  --phantom-bg:  #090810;
+  --moon-bg:     #080c12;
+}
+
+html {
+  scroll-behavior: auto;
+  font-size: 16px;
+}
+
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   LANDING OVERLAY
+   ============================================================ */
+.landing {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  pointer-events: none;
+}
+
+.landing-inner {
+  text-align: center;
+  padding: 2rem;
+}
+
+.landing-title {
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.015em;
+  line-height: 1.15;
+  color: var(--off-white);
+  opacity: 0;
+}
+
+.landing-byline {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(0.55rem, 1vw, 0.7rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  opacity: 0;
+  margin-top: 2rem;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 3.5rem;
+  font-size: 1.4rem;
+  color: var(--off-white);
+  opacity: 0;
+  animation: drift 2.4s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%, 100% { opacity: 0;   transform: translateY(0); }
+  40%, 60%  { opacity: 0.4; transform: translateY(10px); }
+}
+
+/* ============================================================
+   PROGRESS & UI CHROME
+   ============================================================ */
+.progress-track {
+  position: fixed;
+  right: 1.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 35vh;
+  background: rgba(240, 237, 232, 0.08);
+  z-index: 90;
+}
+
+.progress-fill {
+  width: 100%;
+  height: 0%;
+  background: rgba(240, 237, 232, 0.35);
+  transition: height 0.08s linear;
+}
+
+.chapter-label {
+  position: fixed;
+  top: 2.2rem;
+  left: 2.2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  opacity: 0;
+  z-index: 90;
+  transition: opacity 0.5s ease;
+}
+
+.about-btn {
+  position: fixed;
+  bottom: 2.2rem;
+  right: 4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.35);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 90;
+  padding: 0.6rem;
+  transition: color 0.3s ease;
+}
+
+.about-btn:hover {
+  color: var(--off-white);
+}
+
+/* ============================================================
+   JOURNEY & CHAPTERS
+   ============================================================ */
+#journey {
+  position: relative;
+}
+
+.chapter {
+  position: relative;
+  background: var(--black);
+}
+
+.chapter--dark    { background: var(--near-black); }
+.chapter--warm    { background: #0d0b08; }
+.chapter--abyss   { background: #080808; }
+.chapter--violet  { background: #0c0812; }
+.chapter--phantom { background: var(--phantom-bg); }
+.chapter--moon    { background: var(--moon-bg); }
+.chapter--return  { background: var(--black); }
+
+/* ============================================================
+   SCENES
+   ============================================================ */
+.scene {
+  position: relative;
+  /* Height grows to fit the full image — no fixed height that clips */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Abyss / phantom scenes get extra vertical breathing room */
+.scene--abyss {
+  min-height: 110vh;
+}
+
+/* Final scene */
+.scene--final {
+  min-height: 100vh;
+}
+
+/* Atmospheric vignette: edges only, never covers the image centre */
+.scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center,
+    transparent 45%,
+    rgba(8, 8, 8, 0.65) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chapter--abyss   .scene::after,
+.chapter--phantom .scene::after {
+  background: radial-gradient(ellipse at center,
+    transparent 30%,
+    rgba(5, 5, 5, 0.82) 100%
+  );
+}
+
+/* ============================================================
+   PARALLAX IMAGE  — full image, no cropping
+   ============================================================ */
+.parallax-img {
+  /* Show the entire image. Let it define the scene's height. */
+  display: block;
+  width: auto;
+  height: auto;
+
+  /* Never wider than the viewport */
+  max-width: 100%;
+
+  /* Never taller than 92vh so there's always context above/below */
+  max-height: 92vh;
+
+  /* Portrait images that are taller: contain within 92vh,
+     let width be whatever the aspect ratio demands */
+  object-fit: contain;
+
+  position: relative;
+  z-index: 1;
+
+  /* Small amount of flex-shrink prevention */
+  flex-shrink: 0;
+}
+
+/* For the mental-health / phantom series give a tiny extra size boost
+   so they feel more immersive even with contain */
+.scene--abyss .parallax-img {
+  max-height: 88vh;
+}
+
+/* Colour-grade variants */
+.parallax-img--mono {
+  filter: grayscale(100%) contrast(1.08);
+}
+
+.parallax-img--abyss {
+  filter: brightness(0.7) contrast(1.08);
+}
+
+.parallax-img--phantom {
+  filter: brightness(0.62) contrast(1.22) saturate(0.5);
+}
+
+/* Final scene: starts slightly dim, JS reveals it */
+.parallax-img--final {
+  max-height: 92vh;
+}
+
+/* ============================================================
+   SCENE TEXT & POSITIONS
+   ============================================================ */
+.scene-text {
+  position: absolute;
+  z-index: 10;
+  max-width: 500px;
+  padding: 2rem 2.5rem;
+}
+
+.pos--center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 600px;
+}
+
+.pos--bottom-left {
+  bottom: 8%;
+  left: 5%;
+  text-align: left;
+  max-width: 420px;
+}
+
+.pos--bottom {
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 620px;
+}
+
+.pos--right {
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+  max-width: 360px;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+.quote {
+  font-size: clamp(1.05rem, 2vw, 1.65rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--off-white);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.quote--violet { color: var(--violet-text); }
+.quote--moon   { color: var(--silver); }
+
+.quote-sm {
+  font-size: clamp(0.82rem, 1.4vw, 1.05rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(240, 237, 232, 0.82);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.caption-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.42);
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.exhibition-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.28);
+  margin-top: 1.2rem;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.final-quote {
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  color: var(--amber);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.98);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ============================================================
+   CHAPTER DIVIDERS (text-only breaks between chapters)
+   ============================================================ */
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55vh;
+  padding: 5rem 3rem;
+  text-align: center;
+}
+
+.divider-text {
+  font-size: clamp(1rem, 2.2vw, 1.65rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(240, 237, 232, 0.55);
+  max-width: 580px;
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.divider-text--phantom {
+  font-size: clamp(1.2rem, 2.8vw, 2.1rem);
+  color: rgba(180, 155, 210, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.divider--violet .divider-text {
+  color: rgba(190, 160, 220, 0.6);
+}
+
+/* ============================================================
+   ABOUT OVERLAY
+   ============================================================ */
+.about-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 7, 7, 0.97);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+}
+
+.about-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.about-close {
+  position: fixed;
+  top: 2rem;
+  right: 2.5rem;
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.35);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 210;
+  line-height: 1;
+  font-family: 'Cormorant Garamond', serif;
+  transition: color 0.25s ease;
+}
+
+.about-close:hover { color: var(--off-white); }
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 6rem;
+  max-width: 1020px;
+  width: 100%;
+  align-items: center;
+}
+
+.about-photo img {
+  width: 100%;
+  max-height: 82vh;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  filter: grayscale(15%) contrast(1.04);
+}
+
+.about-copy h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--off-white);
+  margin-bottom: 2.4rem;
+  letter-spacing: 0.01em;
+}
+
+.about-copy p {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(240, 237, 232, 0.78);
+  margin-bottom: 1.2rem;
+}
+
+.about-copy em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.about-links {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.about-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: rgba(240, 237, 232, 0.35);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.about-links a:hover { color: var(--off-white); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-photo img { max-height: 45vh; }
+  .about-overlay {
+    padding: 5rem 2rem 2rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .progress-track { display: none; }
+
+  .parallax-img {
+    max-height: 85vh;
+    max-width: 100%;
+  }
+
+  .scene-text { padding: 1.2rem 1.5rem; }
+
+  .pos--right {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: 6%;
+    transform: translateX(-50%);
+    text-align: center;
+    max-width: 90vw;
+  }
+
+  .pos--bottom-left {
+    left: 4%;
+    max-width: 88vw;
+  }
+
+  .chapter-divider {
+    min-height: 40vh;
+    padding: 3rem 1.5rem;
+  }
+}
