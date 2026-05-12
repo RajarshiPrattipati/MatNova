@@ -279,6 +279,7 @@ body {
    SCENE TEXT & POSITIONS
    ============================================================ */
 .scene-text {
+  display: none;
   position: absolute;
   z-index: 10;
   max-width: 500px;
