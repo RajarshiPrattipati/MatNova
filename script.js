@@ -40,7 +40,7 @@ landingTL
     duration: 0.01,
   }, '-=0.2');
 
-// Fade landing out as journey begins
+// Fade landing out as journey begins, reveal nav
 ScrollTrigger.create({
   trigger: '#journey',
   start: 'top 85%',
@@ -54,7 +54,7 @@ ScrollTrigger.create({
         if (el) el.style.display = 'none';
       },
     });
-    gsap.to('#chapterLabel', { opacity: 1, duration: 0.8 });
+    document.getElementById('siteNav').classList.add('revealed');
   },
 });
 
@@ -330,6 +330,45 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNftLigh
    CHAPTER NAVIGATION
    ============================================================ */
 
+/* Nav chapter display */
+const navChapterNumEl  = document.getElementById('navChapterNum');
+const navChapterNameEl = document.getElementById('navChapterName');
+const navHamburger     = document.getElementById('navHamburger');
+
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', '—'];
+let navFirstSet = true;
+
+function animateNavChapter(roman, name) {
+  if (navFirstSet) {
+    navFirstSet = false;
+    navChapterNumEl.textContent  = roman;
+    navChapterNameEl.textContent = name;
+    return;
+  }
+  // Clip name out upward, bring new name in from below
+  gsap.to(navChapterNameEl, {
+    y: '-120%', opacity: 0, duration: 0.22, ease: 'power2.in',
+    onComplete: () => {
+      navChapterNameEl.textContent = name;
+      gsap.fromTo(navChapterNameEl,
+        { y: '120%', opacity: 0 },
+        { y: '0%',   opacity: 1, duration: 0.38, ease: 'power2.out' }
+      );
+    },
+  });
+  // 3D-flip the roman numeral on X axis
+  gsap.to(navChapterNumEl, {
+    rotateX: -90, duration: 0.2, ease: 'power2.in',
+    onComplete: () => {
+      navChapterNumEl.textContent = roman;
+      gsap.fromTo(navChapterNumEl,
+        { rotateX: 90 },
+        { rotateX: 0,  duration: 0.32, ease: 'power2.out' }
+      );
+    },
+  });
+}
+
 const CHAPTERS = [
   { id: 'ch-surface',      label: 'Surface' },
   { id: 'ch-glass',        label: 'The Glass Between' },
@@ -366,11 +405,25 @@ function closeContents() {
   contentsBackdrop.classList.remove('open');
   contentsPanel.setAttribute('aria-hidden', 'true');
   lenis.start();
+  navHamburger.classList.remove('open');
+  navHamburger.setAttribute('aria-expanded', 'false');
 }
 
 contentsBtn.addEventListener('click', openContents);
 contentsClose.addEventListener('click', closeContents);
 contentsBackdrop.addEventListener('click', closeContents);
+
+// Mobile hamburger — same panel, morph animation via CSS class
+navHamburger.addEventListener('click', () => {
+  const isOpen = contentsPanel.classList.contains('open');
+  if (isOpen) {
+    closeContents();
+  } else {
+    navHamburger.classList.add('open');
+    navHamburger.setAttribute('aria-expanded', 'true');
+    openContents();
+  }
+});
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeContents(); });
 
 // Navigate to a chapter by index
@@ -398,6 +451,7 @@ jumpNext.addEventListener('click', () => goToChapter(currentChapterIndex + 1));
 
 function setActiveChapter(idx) {
   currentChapterIndex = idx;
+  animateNavChapter(ROMAN[idx], CHAPTERS[idx].label);
 
   // Highlight active item in panel
   document.querySelectorAll('.contents-link').forEach((l, i) => {

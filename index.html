@@ -20,29 +20,52 @@
     <div class="scroll-hint">↓</div>
   </div>
 
+  <!-- ======= SITE NAV ======= -->
+  <nav class="site-nav" id="siteNav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <span class="nav-brand">Chinoy Mathew</span>
+      <div class="nav-chapter-wrap">
+        <span class="nav-chapter-num" id="navChapterNum">I</span>
+        <div class="nav-chapter-name-clip">
+          <span class="nav-chapter-name" id="navChapterName">Surface</span>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-action-btn" id="aboutBtn">About</button>
+        <button class="nav-action-btn" id="contentsBtn">Contents</button>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+          <span class="hbg"></span>
+          <span class="hbg"></span>
+          <span class="hbg"></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-rule"></div>
+  </nav>
+
   <!-- ======= UI CHROME ======= -->
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   <div class="chapter-label" id="chapterLabel"></div>
-  <button class="about-btn" id="aboutBtn">About</button>
-  <button class="contents-btn" id="contentsBtn">Contents</button>
 
   <!-- ======= CHAPTER NAV PANEL ======= -->
   <nav class="contents-panel" id="contentsPanel" aria-hidden="true">
     <button class="contents-close" id="contentsClose">×</button>
     <p class="contents-heading">Contents</p>
-    <ol class="contents-list">
-      <li><a href="#ch-surface"      class="contents-link" data-index="0"><span class="contents-num">I</span><span class="contents-name">Surface</span></a></li>
-      <li><a href="#ch-glass"        class="contents-link" data-index="1"><span class="contents-num">II</span><span class="contents-name">The Glass Between</span></a></li>
-      <li><a href="#ch-mirrors"      class="contents-link" data-index="2"><span class="contents-num">III</span><span class="contents-name">Others as Mirrors</span></a></li>
-      <li><a href="#ch-burden"       class="contents-link" data-index="3"><span class="contents-num">IV</span><span class="contents-name">The Burden of the Body</span></a></li>
-      <li><a href="#ch-shadow"       class="contents-link" data-index="4"><span class="contents-num">V</span><span class="contents-name">Shadow Work</span></a></li>
-      <li><a href="#ch-inside"       class="contents-link" data-index="5"><span class="contents-num">VI</span><span class="contents-name">Inside</span></a></li>
-      <li><a href="#ch-mural"        class="contents-link" data-index="6"><span class="contents-num">VII</span><span class="contents-name">Mural of a Muse</span></a></li>
-      <li><a href="#ch-phantom"      class="contents-link" data-index="7"><span class="contents-num">VIII</span><span class="contents-name">Phantom of My Mind's Design</span></a></li>
-      <li><a href="#ch-moon"         class="contents-link" data-index="8"><span class="contents-num">IX</span><span class="contents-name">Conversations with the Moon</span></a></li>
-      <li><a href="#ch-illumination" class="contents-link" data-index="9"><span class="contents-num">X</span><span class="contents-name">Illumination</span></a></li>
-      <li class="contents-nft"><a href="#collected" class="contents-link" data-index="10"><span class="contents-num">—</span><span class="contents-name">Collected Works</span></a></li>
-    </ol>
+    <div class="contents-scroll" data-lenis-prevent>
+      <ol class="contents-list">
+        <li><a href="#ch-surface"      class="contents-link" data-index="0"><span class="contents-num">I</span><span class="contents-name">Surface</span></a></li>
+        <li><a href="#ch-glass"        class="contents-link" data-index="1"><span class="contents-num">II</span><span class="contents-name">The Glass Between</span></a></li>
+        <li><a href="#ch-mirrors"      class="contents-link" data-index="2"><span class="contents-num">III</span><span class="contents-name">Others as Mirrors</span></a></li>
+        <li><a href="#ch-burden"       class="contents-link" data-index="3"><span class="contents-num">IV</span><span class="contents-name">The Burden of the Body</span></a></li>
+        <li><a href="#ch-shadow"       class="contents-link" data-index="4"><span class="contents-num">V</span><span class="contents-name">Shadow Work</span></a></li>
+        <li><a href="#ch-inside"       class="contents-link" data-index="5"><span class="contents-num">VI</span><span class="contents-name">Inside</span></a></li>
+        <li><a href="#ch-mural"        class="contents-link" data-index="6"><span class="contents-num">VII</span><span class="contents-name">Mural of a Muse</span></a></li>
+        <li><a href="#ch-phantom"      class="contents-link" data-index="7"><span class="contents-num">VIII</span><span class="contents-name">Phantom of My Mind's Design</span></a></li>
+        <li><a href="#ch-moon"         class="contents-link" data-index="8"><span class="contents-num">IX</span><span class="contents-name">Conversations with the Moon</span></a></li>
+        <li><a href="#ch-illumination" class="contents-link" data-index="9"><span class="contents-num">X</span><span class="contents-name">Illumination</span></a></li>
+        <li class="contents-nft"><a href="#collected" class="contents-link" data-index="10"><span class="contents-num">—</span><span class="contents-name">Collected Works</span></a></li>
+      </ol>
+    </div>
   </nav>
   <div class="contents-backdrop" id="contentsBackdrop"></div>
 
@@ -1692,22 +1715,6 @@
           <p class="nft-edition-tag">edition of 4</p>
           <h3 class="nft-title">shadows in the light</h3>
           <a class="nft-link" href="https://objkt.com/tokens/KT1MNY5qXqDBGv3Lkq5b7jmB9HkKDKWxV86y/7" target="_blank" rel="noopener">collect on objkt →</a>
-        </div>
-      </div>
-      <!-- prologue -->
-      <div class="nft-card" data-title="prologue"
-           data-desc="Edition of 5."
-           data-edition="edition of 5" data-status="sold-out" data-price="sold out"
-           data-img="https://ipfs.io/ipfs/QmRM82xUXXt8SKURJcFk8PAY3n8B6G5xDvRyiKd9UpWbj8"
-           data-url="https://objkt.com/tokens/KT1DgRL4eGngYF9D2WQihNNHG6Ea7hgjwzpN/7">
-        <div class="nft-img-wrap">
-          <img src="https://ipfs.io/ipfs/QmRM82xUXXt8SKURJcFk8PAY3n8B6G5xDvRyiKd9UpWbj8" alt="prologue" loading="lazy">
-          <div class="nft-badge nft-badge--soldout">sold out</div>
-        </div>
-        <div class="nft-info">
-          <p class="nft-edition-tag">edition of 5 · sold out</p>
-          <h3 class="nft-title">prologue</h3>
-          <a class="nft-link" href="https://objkt.com/tokens/KT1DgRL4eGngYF9D2WQihNNHG6Ea7hgjwzpN/7" target="_blank" rel="noopener">view on objkt →</a>
         </div>
       </div>
       <!-- (a) sweet day -->
